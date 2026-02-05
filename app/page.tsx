@@ -22,8 +22,9 @@ type DateOption = {
 
 const DATE_OPTIONS: DateOption[] = [
   { id: "movie", label: "Movie night together 🎬" },
-  { id: "dinner", label: "Dinner on video call 🍽" },
+  { id: "talk", label: "Talking to each other 💬" },
   { id: "game", label: "Game night 🎮" },
+  { id: "idk", label: "I don’t know 🤷" },
 ];
 
 export default function Page() {
@@ -31,19 +32,20 @@ export default function Page() {
   const [screen, setScreen] = useState<Screen>(1);
   const [confetti, setConfetti] = useState<ConfettiPiece[]>([]);
   const [selectedDate, setSelectedDate] = useState<DateOption | null>(null);
+  const [hideNoButton, setHideNoButton] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const hearts = useMemo(() => {
-    return Array.from({ length: 14 }).map((_, i) => ({
+    return Array.from({ length: 90 }).map((_, i) => ({
       id: `heart-${i}`,
-      left: (i * 7.5) % 100,
-      size: 10 + (i % 5) * 4,
-      duration: 10 + (i % 5) * 2,
-      delay: (i % 6) * 1.1,
-      opacity: 0.12 + (i % 3) * 0.05,
+      left: (i * 1.8) % 100,
+      size: 8 + (i % 9) * 2,
+      duration: 8 + (i % 10) * 1.2,
+      delay: (i % 12) * 0.6,
+      opacity: 0.16 + (i % 5) * 0.05,
     }));
   }, []);
 
@@ -79,6 +81,9 @@ export default function Page() {
     setTimeout(() => {
       goToScreen(4);
     }, 450);
+  };
+  const handleNo = () => {
+    setHideNoButton(true);
   };
 
   if (!mounted) {
@@ -134,7 +139,7 @@ export default function Page() {
         <div className="relative w-full max-w-md sm:max-w-lg">
           {/* Screen 1 */}
           <section
-            className={`absolute inset-0 transition-all duration-500 ${
+            className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
               screen === 1
                 ? "opacity-100 translate-y-0"
                 : "pointer-events-none opacity-0 translate-y-4"
@@ -168,7 +173,7 @@ export default function Page() {
 
           {/* Screen 2 */}
           <section
-            className={`absolute inset-0 transition-all duration-500 ${
+            className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
               screen === 2
                 ? "opacity-100 translate-y-0"
                 : "pointer-events-none opacity-0 translate-y-4"
@@ -185,8 +190,8 @@ export default function Page() {
                 </span>
               </div>
 
-              <div className="mt-4 rounded-2xl border border-white/10 bg-white/10 p-4 text-sm leading-relaxed text-rose-100/90 sm:p-5">
-                <p className="max-w-[36ch] sm:max-w-none">
+              <div className="mt-4 max-h-[55vh] overflow-y-auto rounded-2xl border border-white/10 bg-white/10 p-5 text-base leading-relaxed text-rose-100/90 sm:max-h-[60vh] sm:p-6 sm:text-lg">
+                <p className="mx-auto max-w-[36ch] text-center sm:max-w-[48ch]">
                   I knew you for a while before we really talked.
                   <br />
                   We were always around each other, in the same calls, the same
@@ -194,14 +199,14 @@ export default function Page() {
                   <br />
                   and I always thought you were cute, even if I never said it.
                 </p>
-                <p className="mt-3 max-w-[36ch] sm:max-w-none">
+                <p className="mx-auto mt-4 max-w-[36ch] text-center sm:max-w-[48ch]">
                   Then one day, you joined me in a game.
                   <br />
                   I saw your name pop up, walked over, and said “heyyyy Zieee”…
                   <br />
                   and you smiled back with “hiiii”.
                 </p>
-                <p className="mt-3 max-w-[36ch] sm:max-w-none">
+                <p className="mx-auto mt-4 max-w-[36ch] text-center sm:max-w-[48ch]">
                   From there, everything just felt easy.
                   <br />
                   We joked, we messed around, we talked about random things…
@@ -209,14 +214,14 @@ export default function Page() {
                   and somehow, the conversations started getting deeper without
                   us even noticing.
                 </p>
-                <p className="mt-3 max-w-[36ch] sm:max-w-none">
+                <p className="mx-auto mt-4 max-w-[36ch] text-center sm:max-w-[48ch]">
                   You told me later you wanted to call me but were too shy.
                   <br />
                   I told you you could call me anytime.
                   <br />
                   And when we finally did… we didn’t stop.
                 </p>
-                <p className="mt-3 max-w-[36ch] sm:max-w-none">
+                <p className="mx-auto mt-4 max-w-[36ch] text-center sm:max-w-[48ch]">
                   Days turned into hours, hours into nights.
                   <br />
                   I started liking you more than I expected.
@@ -226,7 +231,7 @@ export default function Page() {
                   <br />
                   I don’t think I’ve ever smiled that much.
                 </p>
-                <p className="mt-3 max-w-[36ch] sm:max-w-none">
+                <p className="mx-auto mt-4 max-w-[36ch] text-center sm:max-w-[48ch]">
                   Now here we are.
                   <br />
                   Talking every day. Choosing each other without even asking.
@@ -236,7 +241,7 @@ export default function Page() {
                   <br />
                   hugging you, and finally giving you that kiss.
                 </p>
-                <p className="mt-3 max-w-[36ch] sm:max-w-none">
+                <p className="mx-auto mt-4 max-w-[36ch] text-center sm:max-w-[48ch]">
                   I just want you to know one thing —
                   <br />
                   I’m always here for you.
@@ -257,7 +262,7 @@ export default function Page() {
 
           {/* Screen 3 */}
           <section
-            className={`absolute inset-0 transition-all duration-500 ${
+            className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
               screen === 3
                 ? "opacity-100 translate-y-0"
                 : "pointer-events-none opacity-0 translate-y-4"
@@ -269,7 +274,7 @@ export default function Page() {
                 Will you be my Valentine? 💘
               </h2>
 
-              <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
                 <button
                   onClick={handleYes}
                   className="w-full rounded-2xl bg-gradient-to-r from-rose-400 via-pink-500 to-red-500 px-5 py-3 text-base font-semibold text-white shadow-lg transition-transform focus:outline-none focus:ring-2 focus:ring-rose-200/70 active:scale-[0.98]"
@@ -284,13 +289,22 @@ export default function Page() {
                 >
                   Of course 💖
                 </button>
+                {!hideNoButton && (
+                  <button
+                    onClick={handleNo}
+                    className="w-full rounded-2xl border border-white/25 bg-white/5 px-5 py-3 text-base font-semibold text-rose-100/90 backdrop-blur-sm transition-transform focus:outline-none focus:ring-2 focus:ring-rose-200/70 active:scale-[0.98]"
+                    aria-label="No, not my Valentine"
+                  >
+                    No 🙃
+                  </button>
+                )}
               </div>
             </div>
           </section>
 
           {/* Screen 4 */}
           <section
-            className={`absolute inset-0 transition-all duration-500 ${
+            className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
               screen === 4
                 ? "opacity-100 translate-y-0"
                 : "pointer-events-none opacity-0 translate-y-4"
@@ -350,18 +364,14 @@ export default function Page() {
           </section>
 
           {/* Spacer to keep container height */}
-          <div className="invisible">
-            <div className="rounded-3xl p-6 sm:p-8">
-              <h2 className="text-3xl">.</h2>
-            </div>
-          </div>
+          <div className="h-[72vh] sm:h-[70vh]" />
         </div>
       </div>
 
       <style jsx global>{`
         .heart {
           position: absolute;
-          background: rgba(255, 255, 255, 0.12);
+          background: rgba(255, 255, 255, 0.28);
           transform: rotate(45deg);
           border-radius: 3px;
           animation: floatHeart linear infinite;
@@ -372,7 +382,7 @@ export default function Page() {
           position: absolute;
           width: 100%;
           height: 100%;
-          background: rgba(255, 255, 255, 0.12);
+          background: rgba(255, 255, 255, 0.28);
           border-radius: 50%;
         }
         .heart::before {
