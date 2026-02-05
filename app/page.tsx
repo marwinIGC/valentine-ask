@@ -357,6 +357,9 @@ export default function Page() {
                     <div className="mt-1 text-sm text-rose-100/80">
                       {selectedDate.label}
                     </div>
+                    <div className="mt-2 text-xs text-rose-100/70">
+                      Screenshot this and send me what you chose 😌
+                    </div>
                   </div>
                 )}
               </div>
